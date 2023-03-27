@@ -1,21 +1,14 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "Product B"
-    },
-    {
-      "name": "product C",
+      "name": "Products B update",
+      "price": "250000",
       "id": 2
     },
     {
-      "name": "product D",
+      "name": "Product C",
+      "price": "1500000",
       "id": 3
-    },
-    {
-      "name": "iphone 13",
-      "price": "555555555",
-      "id": 4
     }
   ]
 }
