@@ -1,27 +1,24 @@
 // AdminPage.js
-import React, { useState } from 'react';
-import AddProductPage from './AddProduct';
-import ProductManagementPage from './ProductManagement';
-import { addProduct, deleteProduct } from '../../api/product';
+import React from 'react';
+import { Button, Col, Row, Statistic } from 'antd';
 
 const Dashboard = () => {
-  const [products, setProducts] = useState([]);
-
-  const handleAddProduct = async (newProduct) => {
-    const addedProduct = await addProduct(newProduct);
-    setProducts([...products, addedProduct]);
-  };
-
-  const handleRemoveProduct = async (productId) => {
-    await deleteProduct(productId);
-    setProducts(products.filter((product) => product.id !== productId));
-  };
 
   return (
-    <div>
-      <AddProductPage onAdd={handleAddProduct} />
-      <ProductManagementPage products={products} onRemove={handleRemoveProduct} />
-    </div>
+    <Row gutter={16}>
+    <Col span={12}>
+      <Statistic title="Active Users" value={112893} />
+    </Col>
+    <Col span={12}>
+      <Statistic title="Account Balance (CNY)" value={112893} precision={2} />
+      <Button style={{ marginTop: 16 }} type="primary">
+        Recharge
+      </Button>
+    </Col>
+    <Col span={12}>
+      <Statistic title="Active Users" value={112893} loading />
+    </Col>
+  </Row>
   );
 };
 
