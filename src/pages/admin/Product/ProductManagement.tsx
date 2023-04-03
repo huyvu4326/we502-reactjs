@@ -160,7 +160,7 @@ const columns: ColumnsType<DataType> = [
 },
 ];
 
-    return <Table columns={columns} dataSource={data} pagination={{ pageSize: 10 }}/>
+    return <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }}/>
         // <div className="container mt-5">
         //     <div className="row">
         //         <div className="col-md-12">

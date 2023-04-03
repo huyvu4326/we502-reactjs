@@ -8,7 +8,7 @@ interface IProduct{
 const getAllProduct = () => {
     return instance.get('/products');
 }
-const getOneProduct = (id:number) => {
+const getProduct = (id:number) => {
     return instance.get('/products/' + id);
 }
 const addProduct = (product:IProduct) => {
@@ -21,4 +21,4 @@ const deleteProduct = (id: number) => {
     return instance.delete('/products/' + id);
 }
 
-export { getAllProduct, getOneProduct, addProduct, updateProduct, deleteProduct }
+export { getAllProduct, getProduct, addProduct, updateProduct, deleteProduct }

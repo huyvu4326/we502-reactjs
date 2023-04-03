@@ -1,8 +1,9 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
-import HomePage from './pages/HomePage'
-import ProductPage from './pages/Product'
-import ProductDetailPage from './pages/ProductDetail'
+import HomePage from './components/HomePage'
+import ProductPage from './components/Product'
+import ProductDetailPage from './components/ProductDetail'
 import Dashboard from './pages/admin/Dashboard'
 import ProductManagementPage from './pages/admin/Product/ProductManagement'
 import AddProductPage from './pages/admin/Product/AddProduct'

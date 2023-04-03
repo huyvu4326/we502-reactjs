@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import { Divider, Menu, Switch } from 'antd';
 import type { MenuProps, MenuTheme } from 'antd/es/menu';
-import img from '../../../../public/Twitter-logo.svg.webp'
+// import img from '../../../../public/Twitter-logo.svg.webp'
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -29,14 +29,7 @@ const items: MenuItem[] = [
   getItem(<a href='/admin'>Home</a>, 'link', <MailOutlined/>),
   getItem(<a href='/admin/products'>Products</a>,'link', <ProjectOutlined />,),
 //   getItem('Navigation Two', '2', <CalendarOutlined />),
- 
-  getItem(
-    <a href="" target="_blank" rel="noopener noreferrer">
-      Contact
-    </a>,
-    'link',
-    <LinkOutlined />,
-  ),
+  getItem(<a href="" target="_blank" rel="noopener noreferrer">Contact</a>, 'link', <LinkOutlined />,),
 ];
 type Props = {}
 
@@ -44,7 +37,7 @@ const MenuAdmin = (props: Props) => {
 
   return (
     <>
-      <img src={img} alt="" width={'100px'}/>
+      {/* <img src={img} alt="" width={'100px'}/> */}
       <br />
       <br />
       <Menu
