@@ -13,9 +13,6 @@ export const addProduct = (product: IProduct) => {
         headers:{
             Authorization:`Bearer ${JSON.parse(localStorage.getItem('token')!)}`
         },
-        // body: {
-            
-        // }
     });
   };
 export const updateProduct = (id: number | string, product: IProduct) => {
