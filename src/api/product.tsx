@@ -15,7 +15,7 @@ export const addProduct = (product: IProduct) => {
     });
   };
 export const updateProduct = (product: IProduct) => {
-    return instance.patch(`/products/${product._id}`, {
+    return instance.patch(`/products/${product._id}`, product, {
         headers:{
             Authorization:`Bearer ${JSON.parse(localStorage.getItem('token')!)}`
         }

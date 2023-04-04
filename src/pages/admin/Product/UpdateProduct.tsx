@@ -49,19 +49,10 @@ const UpdateProductPage = (props:IProps) => {
             _id: id,
             ...data
         };
+        navigate('/admin/products')
+        message.success('Cập nhật sản phẩm thành công!', 2);
         console.log(updateProduct);
         props.onUpdate(updateProduct);
-        // axios.patch(`http://localhost:8080/api/products/${id}`, updateProduct)
-        //   .then(response => {
-        //     console.log(response.data);
-        //     props.onUpdate(updateProduct);
-        //     navigate('/admin/products')
-        //     message.success('Cập nhật sản phẩm thành công!', 2);
-        //   })
-        //   .catch(error => {
-        //     console.log(error);
-        //     message.error('Có lỗi xảy ra khi cập nhật sản phẩm!', 2);
-        //   });
     };
 
     const onFinishFailed = (errorInfo: any) => {

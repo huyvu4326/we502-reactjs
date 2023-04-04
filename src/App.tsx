@@ -44,9 +44,7 @@ function App() {
     });
   };
   
-  const onHandleUpdate = (product:IProduct) => {
-    console.log(product);
-    
+  const onHandleUpdate = (product:IProduct) => { 
     updateProduct(product).then(() => {
       // setProducts(products.map((item) => (item.id === product.id ? product : item)));
     });
