@@ -1,21 +1,27 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, message, Select } from 'antd';
 
 interface IProduct{
     id: number,
     name: string,
     price: number
 };
+interface ICategory {
+    id: number,
+    name: string
+};
 interface IProps{
     onAdd: (product:IProduct) => void
+    categories: ICategory[]
 }
 const AddProductPage = (props:IProps) => { 
     const navigate = useNavigate()
     const onFinish = (values: any) => {
         props.onAdd(values);
         navigate('/admin/products')
+        message.success('Thêm sản phẩm thành công!', 2);
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -56,6 +62,16 @@ const AddProductPage = (props:IProps) => {
                     rules={[{ required: true, message: 'Vui lòng nhập mô tả sản phẩm!' }]}
                 >
                     <Input />
+                </Form.Item>
+                <Form.Item
+                    label="Category"
+                    name="category"
+                    rules={[{ required: true, message: 'Vui lòng chọn danh mục!' }]}
+                >
+                    <Select>
+                    {props.categories && props.categories.map((category) => (
+                    <Select.Option key={category.id} value={category.id}>{category.name}</Select.Option>))}
+                    </Select>
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <Button type="primary" htmlType="submit">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  HomeFilled,
   ProjectOutlined,
   LinkOutlined,
   MailOutlined,
@@ -26,28 +27,60 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem(<a href='/admin'>Home</a>, 'link', <MailOutlined/>),
-  getItem(<a href='/admin/products'>Products</a>,'link', <ProjectOutlined />,),
-//   getItem('Navigation Two', '2', <CalendarOutlined />),
-  getItem(<a href="" target="_blank" rel="noopener noreferrer">Contact</a>, 'link', <LinkOutlined />,),
+  getItem(<a href='/admin'>Home</a>, 'link', <HomeFilled/>),
+  getItem('Products', 'link', <ProjectOutlined />, [
+    getItem('All Products', 'link', [<a href='/admin/products'>All Products</a>]),
+    getItem('Add Product', 'link', [<a href='/admin/products/add'>Add Product</a>]),
+    getItem('Categories', 'link', [<a href='/admin/products/categories'>All Products</a>]),
+  ]),
+  getItem(<a href=''>Services</a>, 'link', <HomeFilled/>),
+  getItem(<a href=''>Blog</a>, 'link', <HomeFilled/>),
+  getItem('Contact', '3', <LinkOutlined />, [
+    getItem('Email', '3.1', null, [<a href='mailto:contact@example.com'>contact@example.com</a>]),
+    getItem('Phone', '3.2', null, [<span>(123) 456-7890</span>]),
+  ]),
 ];
-type Props = {}
 
-const MenuAdmin = (props: Props) => {
-
+const MenuAdmin = () => {
+  const [theme, setTheme] = useState<MenuTheme>('light');
+  
   return (
     <>
-      {/* <img src={img} alt="" width={'100px'}/> */}
-      <br />
-      <br />
+      {/* <Switch
+        checked={theme === 'dark'}
+        onChange={(checked) => setTheme(checked ? 'dark' : 'light')}
+        checkedChildren="Dark"
+        unCheckedChildren="Light"
+        style={{ marginBottom: 16 }}
+      /> */}
       <Menu
         style={{ width: 256 }}
         defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
-        items={items}
-      />
+        defaultOpenKeys={['2']}
+        theme={theme}
+      >
+        {items.map((item) => {
+          if (item.children) {
+            return (
+              <Menu.SubMenu key={item.key} icon={item.icon} title={item.label}>
+                {item.children.map((child) => (
+                  <Menu.Item key={child.key} children={child.children}>
+                    {child.label}
+                  </Menu.Item>
+                ))}
+              </Menu.SubMenu>
+            )
+          } else {
+            return (
+              <Menu.Item key={item.key} icon={item.icon} children={item.children}>
+                {item.label}
+              </Menu.Item>
+            )
+          }
+        })}
+      </Menu>
     </>
-  )
-}
+  );
+};
 
 export default MenuAdmin;

@@ -3,56 +3,26 @@
     {
       "id": 1,
       "name": "Product A update",
-      "price": "2000",
-      "desc": "adsfadfgda"
+      "price": "1000101010",
+      "desc": "dfghdhf"
     },
     {
-      "name": "Product B",
-      "price": "250000",
-      "desc": "dfszfgdsag",
+      "name": "Products B",
+      "price": "2000",
+      "desc": "fsdgbsdV",
       "id": 2
     },
     {
       "name": "Product C",
-      "price": "250000",
-      "desc": "dfszfgdsag",
+      "price": "2020202",
+      "desc": "hà huy vũ",
       "id": 3
     },
     {
-      "name": "Product D",
-      "price": "250000",
-      "desc": "dfszfgdsag",
+      "name": "ahf huy cuadxad",
+      "price": "5151635",
+      "desc": "advc",
       "id": 4
-    },
-    {
-      "name": "Product E",
-      "price": "250000",
-      "desc": "dfszfgdsag",
-      "id": 5
-    },
-    {
-      "name": "Product F",
-      "price": "250000",
-      "desc": "dfszfgdsag",
-      "id": 6
-    },
-    {
-      "name": "Product G",
-      "price": "250000",
-      "desc": "dfszfgdsag",
-      "id": 7
-    },
-    {
-      "name": "Product H",
-      "price": "250000",
-      "desc": "dfszfgdsag",
-      "id": 8
-    },
-    {
-      "name": "hà huy vũ",
-      "price": "150000",
-      "desc": "ầdfadg",
-      "id": 9
     }
   ]
 }

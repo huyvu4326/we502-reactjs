@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { Button, Checkbox, Form, Input, message } from 'antd';
+import { Button, Checkbox, Form, Input, message, Select } from 'antd';
 import axios from 'axios';
 
 interface IProduct{
@@ -10,8 +10,13 @@ interface IProduct{
     price: number,
     desc: string
 };
+interface ICategory {
+    id: number,
+    name: string
+};
 interface IProps{
     onUpdate: (product:IProduct) => void
+    categories: ICategory[]
 }
 
 const UpdateProductPage = (props:IProps) => {
@@ -19,7 +24,7 @@ const UpdateProductPage = (props:IProps) => {
     const[form]= Form.useForm();
     const { id } = useParams() // lấy id từ url
     useEffect(() => {
-        axios.get(`http://localhost:3000/products/${id}`)
+        axios.get(`http://localhost:8080/products/${id}`)
           .then(response => {
             console.log(response.data);
             form.setFieldsValue(response.data);
@@ -82,6 +87,16 @@ const UpdateProductPage = (props:IProps) => {
                      <Input value={`${form.getFieldValue('desc')}`} />
                 </Form.Item>
 
+                <Form.Item
+                    label="Category"
+                    name="category"
+                    // rules={[{ required: true, message: 'Vui lòng chọn danh mục!' }]}
+                >
+                    <Select>
+                    {props.categories && props.categories.map((category) => (
+                    <Select.Option key={category.id} value={category.id}>{category.name}</Select.Option>))}
+                    </Select>
+                </Form.Item>
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <Button type="primary" htmlType="submit">
                         Cập nhật sản phẩm

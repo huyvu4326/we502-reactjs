@@ -7,31 +7,43 @@ import ProductDetailPage from './components/ProductDetail'
 import Dashboard from './pages/admin/Dashboard'
 import ProductManagementPage from './pages/admin/Product/ProductManagement'
 import AddProductPage from './pages/admin/Product/AddProduct'
-import { addProduct, updateProduct } from './api/product'
+import { getProducts, addProduct, deleteProducts, updateProduct } from './api/product';
+import { getCategories } from './api/category';
 import UpdateProductPage from './pages/admin/Product/UpdateProduct'
 import AdminLayout from './pages/Layouts/AdminLayout'
 import WebsiteLayout from './pages/Layouts/WebsiteLayout'
+import Signin from "./pages/admin/Auth/signIn";
 
 function App() {
-  const [products, setProduct] = useState([])
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:3000/products')
-      .then(response => response.json())
-      .then(data => setProduct(data))
-  }, [])
-
+    getProducts().then((response) => {
+    setProducts(response.data.docs);
+  });
+  }, []);
+  useEffect(() => {
+    getCategories().then((response) => {
+      setCategories(response.data.docs);
+    });
+  }, []);
   const onHandleRemove = (id) => {
+    deleteProducts(id).then(() => {
+      setProducts(products.filter((item) => item.id !== id));
+    });
+  };
 
-    fetch('http://localhost:3000/products/' + id, {
-      method: 'DELETE'
-    }).then(() => setProduct(products.filter(item => item.id != id)))
-  }
   const onHandleAdd = (product) => {
-    addProduct(product)
-  }
-  const onHandleUpdate = (product) => { // hàm xử lý khi submit form update
-    updateProduct(product).then(() => setProduct(products.map(item => item.id == product.id ? product : item)))
-  }
+    addProduct(product).then(() => {
+      setProducts([...products, product]);
+    });
+  };
+  
+  const onHandleUpdate = (product) => {
+    updateProduct(product).then(() => {
+      setProducts(products.map((item) => (item.id === product.id ? product : item)));
+    });
+  };
   return (
     <div className="App">
 
@@ -40,16 +52,17 @@ function App() {
           <Route path='/' element={<WebsiteLayout />}>
             <Route index element={<HomePage />} />
             <Route path='products'>
-              <Route index element={<ProductPage products={products} onRemove={onHandleRemove} />} />
-              <Route path=':id' element={<ProductDetailPage products={products} />} />
+              <Route index element={<ProductPage products={products} onRemove={onHandleRemove} categories={categories}/>} />
+              <Route path=':id' element={<ProductDetailPage products={products} categories={categories}/>} />
             </Route>
           </Route>
           <Route path='/admin' element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
+            <Route path="login" index element={<Signin/>}/>
             <Route path='products' >
-              <Route index element={<ProductManagementPage products={products} onRemove={onHandleRemove}/>} />
+              <Route index element={<ProductManagementPage products={products} onRemove={onHandleRemove} categories={categories}/>} />
               <Route path='add' element={<AddProductPage onAdd={onHandleAdd} />} />
-              <Route path=':id/update' element={<UpdateProductPage onUpdate={onHandleUpdate} products={products} />} />
+              <Route path=':id/update' element={<UpdateProductPage onUpdate={onHandleUpdate} products={products} categories={categories}/>} />
             </Route>
           </Route>
         </Routes>

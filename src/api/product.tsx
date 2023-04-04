@@ -1,24 +1,30 @@
 import instance from "./instance";
-interface IProduct{
-    id: number,
-    name: string,
-    price: number
-};
-
-const getAllProduct = () => {
+import { IProduct } from "../interfaces/product";
+export const getProducts = () => {
     return instance.get('/products');
 }
-const getProduct = (id:number) => {
-    return instance.get('/products/' + id);
+export const getProductById = (id: number | string) => {
+    return instance.get(`/products/${id}`);
+  };
+  
+export const addProduct = (product: IProduct) => {
+    return instance.post("/products", product, {
+        headers:{
+            Authorization:`Bearer ${JSON.parse(localStorage.getItem('token')!)}`
+        }
+    });
+  };
+export const updateProduct = (id: number | string, product: IProduct) => {
+    return instance.put(`/products/${id}`, product, {
+        headers:{
+            Authorization:`Bearer ${JSON.parse(localStorage.getItem('token')!)}`
+        }
+    });
+  };
+export const deleteProducts = (id:number|string) => {
+    return instance.delete(`/products/${id}`,{
+        headers:{
+            Authorization:`Bearer ${JSON.parse(localStorage.getItem('token')!)}`
+        }
+    })
 }
-const addProduct = (product:IProduct) => {
-    return instance.post('/products', product);
-}
-const updateProduct = (product:IProduct) => {
-    return instance.put('/products/' + product.id, product);
-}
-const deleteProduct = (id: number) => {
-    return instance.delete('/products/' + id);
-}
-
-export { getAllProduct, getProduct, addProduct, updateProduct, deleteProduct }
