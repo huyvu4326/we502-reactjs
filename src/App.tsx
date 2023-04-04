@@ -45,8 +45,10 @@ function App() {
   };
   
   const onHandleUpdate = (product:IProduct) => {
+    console.log(product);
+    
     updateProduct(product).then(() => {
-      setProducts(products.map((item) => (item.id === product.id ? product : item)));
+      // setProducts(products.map((item) => (item.id === product.id ? product : item)));
     });
   };
   // const onHandleAddCategory = (category:ICategory) => {

@@ -27,7 +27,6 @@ const UpdateProductPage = (props:IProps) => {
     useEffect(() => {
         axios.get(`http://localhost:8080/api/products/${id}`)
           .then(response => {
-            console.log(response.data);
             form.setFieldsValue(response.data);
           })
           .catch(error => {
@@ -47,20 +46,22 @@ const UpdateProductPage = (props:IProps) => {
     
     const onFinish = (data) => {
         const updateProduct = {
-            id: parseInt(id),
+            _id: id,
             ...data
         };
-        axios.put(`http://localhost:8080/api/products/${id}`, updateProduct)
-          .then(response => {
-            console.log(response.data);
-            props.onUpdate(updateProduct);
-            navigate('/admin/products')
-            message.success('Cập nhật sản phẩm thành công!', 2);
-          })
-          .catch(error => {
-            console.log(error);
-            message.error('Có lỗi xảy ra khi cập nhật sản phẩm!', 2);
-          });
+        console.log(updateProduct);
+        props.onUpdate(updateProduct);
+        // axios.patch(`http://localhost:8080/api/products/${id}`, updateProduct)
+        //   .then(response => {
+        //     console.log(response.data);
+        //     props.onUpdate(updateProduct);
+        //     navigate('/admin/products')
+        //     message.success('Cập nhật sản phẩm thành công!', 2);
+        //   })
+        //   .catch(error => {
+        //     console.log(error);
+        //     message.error('Có lỗi xảy ra khi cập nhật sản phẩm!', 2);
+        //   });
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -111,7 +112,7 @@ const UpdateProductPage = (props:IProps) => {
                 >
                 <Select>
                     {categories && categories.map((category) => (
-                <Select.Option key={category.id} value={category.id}>{category.name}</Select.Option>
+                <Select.Option key={category._id} value={category._id}>{category.name}</Select.Option>
                     ))}
                 </Select>
                 </Form.Item>

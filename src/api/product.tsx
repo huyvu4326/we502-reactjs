@@ -12,11 +12,10 @@ export const addProduct = (product: IProduct) => {
         headers:{
             Authorization:`Bearer ${JSON.parse(localStorage.getItem('token')!)}`,
         },
-       
     });
   };
-export const updateProduct = (id: number | string, product: IProduct) => {
-    return instance.put(`/products/${id}`, product, {
+export const updateProduct = (product: IProduct) => {
+    return instance.patch(`/products/${product._id}`, {
         headers:{
             Authorization:`Bearer ${JSON.parse(localStorage.getItem('token')!)}`
         }
