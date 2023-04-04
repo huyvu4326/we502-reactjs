@@ -9,10 +9,10 @@ export const getProductById = (id: number | string) => {
   
 export const addProduct = (product: IProduct) => {
     return instance.post("/products", product, {
-        method: "POST",
         headers:{
-            Authorization:`Bearer ${JSON.parse(localStorage.getItem('token')!)}`
+            Authorization:`Bearer ${JSON.parse(localStorage.getItem('token')!)}`,
         },
+       
     });
   };
 export const updateProduct = (id: number | string, product: IProduct) => {

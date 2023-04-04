@@ -32,9 +32,7 @@ const AddProductPage = (props:IProps) => {
       }, [])
 
     const onFinish = (values: any) => {
-        // console.log(values);
-        // return
-        
+        console.log(values);
         props.onAdd(values);
         navigate('/admin/products')
         message.success('Thêm sản phẩm thành công!', 2);
@@ -74,19 +72,19 @@ const AddProductPage = (props:IProps) => {
 
                 <Form.Item
                     label="Product Description"
-                    name="desc"
+                    name="description"
                     rules={[{ required: true, message: 'Vui lòng nhập mô tả sản phẩm!' }]}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
                     label="Category"
-                    name="category"
+                    name="categoryId"
                     // rules={[{ required: true, message: 'Vui lòng chọn danh mục!' }]}
                 >
                 <Select>
                     {categories && categories.map((category) => (
-                <Select.Option key={category.id} value={category.id}>{category.name}</Select.Option>
+                <Select.Option key={category._id} value={category._id}>{category.name}</Select.Option>
                     ))}
                 </Select>
                 </Form.Item>
@@ -99,5 +97,4 @@ const AddProductPage = (props:IProps) => {
         </div>
     )
 }
-
 export default AddProductPage

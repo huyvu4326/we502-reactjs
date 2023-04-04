@@ -14,32 +14,52 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 function getItem(
   label: React.ReactNode,
-  key?: React.Key | null,
+  key: React.Key,
   icon?: React.ReactNode,
   children?: MenuItem[],
+  type?: 'group',
+  href?: string,
 ): MenuItem {
-  return {
+  const itemProps: MenuItem = {
     key,
     icon,
     children,
-    label,
-  } as MenuItem;
+    type,
+  };
+  if (href) {
+    itemProps.label = (
+      <a href={href}>
+        {icon}
+        <span>{label}</span>
+      </a>
+    );
+  } else {
+    itemProps.label = (
+      <>
+        {icon}
+        <span>{label}</span>
+      </>
+    );
+  }
+  return itemProps;
 }
 
 const items: MenuItem[] = [
-  getItem(<a href='/admin'>Home</a>, 'link', <HomeFilled/>),
+  getItem('Home', '1', <HomeFilled/>, undefined, undefined, '/admin'),
   getItem('Products', '2', <ProjectOutlined />, [
-    getItem('All Products', 'link', [<a href='/admin/products'>All Products</a>]),
-    getItem('Add Product', 'link', [<a href='/admin/products/add'>Add Product</a>]),
-    getItem('Categories', 'link', [<a href='/admin/products/categories'>All Products</a>]),
+    getItem('All Products', '2.1', null, undefined, undefined, '/admin/products'),
+    getItem('Add Product', '2.2', null, undefined, undefined, '/admin/products/add'),
+    getItem('All Categories', '2.3', null, undefined, undefined, '/admin/categories'),
+    getItem('Add Categories', '2.4', null, undefined, undefined, '/admin/categories/add_categories'),
   ]),
-  getItem(<a href=''>Services</a>, '3', <HomeFilled/>),
-  getItem(<a href=''>Blog</a>, '3.1', <HomeFilled/>),
+  getItem('Services', '3', <HomeFilled/>, undefined, undefined, ''),
+  getItem('Blog', '3.1', <HomeFilled/>, undefined, undefined, ''),
   getItem('Contact', '4', <LinkOutlined />, [
-    getItem('Email', '4.1', null, [<a href='mailto:contact@example.com'>contact@example.com</a>]),
-    getItem('Phone', '4.2', null, [<span>(123) 456-7890</span>]),
+    getItem('Email', '4.1', null, undefined, undefined, 'mailto:contact@example.com'),
+    getItem('Phone', '4.2', null, undefined, undefined, ''),
   ]),
 ];
+
 
 const MenuAdmin = () => {
   const [theme, setTheme] = useState<MenuTheme>('light');
@@ -58,27 +78,8 @@ const MenuAdmin = () => {
         defaultSelectedKeys={['1']}
         defaultOpenKeys={['2']}
         theme={theme}
-      >
-        {items.map((item) => {
-          if (item.children) {
-            return (
-              <Menu.SubMenu key={item.key} icon={item.icon} title={item.label}>
-                {item.children.map((child) => (
-                  <Menu.Item key={child.key} children={child.children}>
-                    {child.label}
-                  </Menu.Item>
-                ))}
-              </Menu.SubMenu>
-            )
-          } else {
-            return (
-              <Menu.Item key={item.key} icon={item.icon} children={item.children}>
-                {item.label}
-              </Menu.Item>
-            )
-          }
-        })}
-      </Menu>
+        items={items}
+      />
     </>
   );
 };

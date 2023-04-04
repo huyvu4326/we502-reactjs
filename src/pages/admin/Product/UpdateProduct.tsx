@@ -19,14 +19,13 @@ interface IProps{
     onUpdate: (product:IProduct) => void
     categories: ICategory[]
 }
-
 const UpdateProductPage = (props:IProps) => {
     const [categories, setCategories] = useState<ICategory[]>([])
     const navigate = useNavigate()
     const[form]= Form.useForm();
     const { id } = useParams() // lấy id từ url
     useEffect(() => {
-        axios.get(`http://localhost:8080/products/${id}`)
+        axios.get(`http://localhost:8080/api/products/${id}`)
           .then(response => {
             console.log(response.data);
             form.setFieldsValue(response.data);
@@ -34,8 +33,9 @@ const UpdateProductPage = (props:IProps) => {
           .catch(error => {
             console.log(error);
           });
-      }, []);
-      useEffect(() => {
+    }, [id,form]);
+    
+    useEffect(() => {
         getCategories()
            .then(response => {
              setCategories(response.data)
@@ -50,9 +50,17 @@ const UpdateProductPage = (props:IProps) => {
             id: parseInt(id),
             ...data
         };
-        props.onUpdate(updateProduct);
-        navigate('/admin/products')
-        message.success('Cập nhật sản phẩm thành công!', 2);
+        axios.put(`http://localhost:8080/api/products/${id}`, updateProduct)
+          .then(response => {
+            console.log(response.data);
+            props.onUpdate(updateProduct);
+            navigate('/admin/products')
+            message.success('Cập nhật sản phẩm thành công!', 2);
+          })
+          .catch(error => {
+            console.log(error);
+            message.error('Có lỗi xảy ra khi cập nhật sản phẩm!', 2);
+          });
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -70,8 +78,6 @@ const UpdateProductPage = (props:IProps) => {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
                 form={form} 
-                onFinish={onFinish}
-                autoComplete="off" 
             >
                 
                 <Form.Item
@@ -92,7 +98,7 @@ const UpdateProductPage = (props:IProps) => {
 
                 <Form.Item
                     label="Product Description"
-                    name="desc"
+                    name="description"
                     // rules={[{ required: true, message: 'Vui lòng nhập mô tả sản phẩm!' }]}
                 >
                      <Input value={`${form.getFieldValue('desc')}`} />
@@ -100,7 +106,7 @@ const UpdateProductPage = (props:IProps) => {
 
                 <Form.Item
                     label="Category"
-                    name="category"
+                    name="categoryId"
                     // rules={[{ required: true, message: 'Vui lòng chọn danh mục!' }]}
                 >
                 <Select>
