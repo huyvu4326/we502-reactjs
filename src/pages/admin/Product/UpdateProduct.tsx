@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { Button, Checkbox, Form, Input, message, Select } from 'antd';
 import axios from 'axios';
+import { getCategories } from '../../../api/category';
 
 interface IProduct{
     id: number,
@@ -20,6 +21,7 @@ interface IProps{
 }
 
 const UpdateProductPage = (props:IProps) => {
+    const [categories, setCategories] = useState<ICategory[]>([])
     const navigate = useNavigate()
     const[form]= Form.useForm();
     const { id } = useParams() // lấy id từ url
@@ -33,6 +35,15 @@ const UpdateProductPage = (props:IProps) => {
             console.log(error);
           });
       }, []);
+      useEffect(() => {
+        getCategories()
+           .then(response => {
+             setCategories(response.data)
+           })
+           .catch(error => {
+             console.error(error)
+           })
+       }, [])
     
     const onFinish = (data) => {
         const updateProduct = {
@@ -92,10 +103,11 @@ const UpdateProductPage = (props:IProps) => {
                     name="category"
                     // rules={[{ required: true, message: 'Vui lòng chọn danh mục!' }]}
                 >
-                    <Select>
-                    {props.categories && props.categories.map((category) => (
-                    <Select.Option key={category.id} value={category.id}>{category.name}</Select.Option>))}
-                    </Select>
+                <Select>
+                    {categories && categories.map((category) => (
+                <Select.Option key={category.id} value={category.id}>{category.name}</Select.Option>
+                    ))}
+                </Select>
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <Button type="primary" htmlType="submit">

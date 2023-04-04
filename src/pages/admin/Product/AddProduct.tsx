@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { Button, Checkbox, Form, Input, message, Select } from 'antd';
+import { getCategories } from '../../../api/category';
 
 interface IProduct{
     id: number,
@@ -17,8 +18,23 @@ interface IProps{
     categories: ICategory[]
 }
 const AddProductPage = (props:IProps) => { 
+    const [categories, setCategories] = useState<ICategory[]>([])
     const navigate = useNavigate()
+
+    useEffect(() => {
+       getCategories()
+          .then(response => {
+            setCategories(response.data)
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }, [])
+
     const onFinish = (values: any) => {
+        // console.log(values);
+        // return
+        
         props.onAdd(values);
         navigate('/admin/products')
         message.success('Thêm sản phẩm thành công!', 2);
@@ -66,12 +82,13 @@ const AddProductPage = (props:IProps) => {
                 <Form.Item
                     label="Category"
                     name="category"
-                    rules={[{ required: true, message: 'Vui lòng chọn danh mục!' }]}
+                    // rules={[{ required: true, message: 'Vui lòng chọn danh mục!' }]}
                 >
-                    <Select>
-                    {props.categories && props.categories.map((category) => (
-                    <Select.Option key={category.id} value={category.id}>{category.name}</Select.Option>))}
-                    </Select>
+                <Select>
+                    {categories && categories.map((category) => (
+                <Select.Option key={category.id} value={category.id}>{category.name}</Select.Option>
+                    ))}
+                </Select>
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <Button type="primary" htmlType="submit">

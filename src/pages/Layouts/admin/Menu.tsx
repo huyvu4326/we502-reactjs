@@ -28,16 +28,16 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem(<a href='/admin'>Home</a>, 'link', <HomeFilled/>),
-  getItem('Products', 'link', <ProjectOutlined />, [
+  getItem('Products', '2', <ProjectOutlined />, [
     getItem('All Products', 'link', [<a href='/admin/products'>All Products</a>]),
     getItem('Add Product', 'link', [<a href='/admin/products/add'>Add Product</a>]),
     getItem('Categories', 'link', [<a href='/admin/products/categories'>All Products</a>]),
   ]),
-  getItem(<a href=''>Services</a>, 'link', <HomeFilled/>),
-  getItem(<a href=''>Blog</a>, 'link', <HomeFilled/>),
-  getItem('Contact', '3', <LinkOutlined />, [
-    getItem('Email', '3.1', null, [<a href='mailto:contact@example.com'>contact@example.com</a>]),
-    getItem('Phone', '3.2', null, [<span>(123) 456-7890</span>]),
+  getItem(<a href=''>Services</a>, '3', <HomeFilled/>),
+  getItem(<a href=''>Blog</a>, '3.1', <HomeFilled/>),
+  getItem('Contact', '4', <LinkOutlined />, [
+    getItem('Email', '4.1', null, [<a href='mailto:contact@example.com'>contact@example.com</a>]),
+    getItem('Phone', '4.2', null, [<span>(123) 456-7890</span>]),
   ]),
 ];
 

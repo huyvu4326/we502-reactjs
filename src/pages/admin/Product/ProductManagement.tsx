@@ -13,7 +13,7 @@ const removeProduct = (id) => {
 }
 const data = Array.isArray(props.products) ? props.products.map(item => {
   return {
-    key: item.id,
+    key: item._id,
     name: item.name,
     price: item.price,
     desc: item.description,

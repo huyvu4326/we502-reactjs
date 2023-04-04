@@ -13,6 +13,7 @@ import UpdateProductPage from './pages/admin/Product/UpdateProduct'
 import AdminLayout from './pages/Layouts/AdminLayout'
 import WebsiteLayout from './pages/Layouts/WebsiteLayout'
 import Signin from "./pages/admin/Auth/signIn";
+import { IProduct } from "./interfaces/product";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -27,15 +28,17 @@ function App() {
       setCategories(response.data.docs);
     });
   }, []);
-  const onHandleRemove = (id) => {
+  const onHandleRemove = (id: string|number) => {
     deleteProducts(id).then(() => {
       setProducts(products.filter((item) => item.id !== id));
     });
   };
-
-  const onHandleAdd = (product) => {
+  const onHandleAdd = (product:IProduct) => {
+    // console.log(product);
+    
     addProduct(product).then(() => {
-      setProducts([...products, product]);
+      // setProducts([...products, product]);
+      getProducts().then(({data}) => setProducts(data))
     });
   };
   
