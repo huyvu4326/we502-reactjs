@@ -2,8 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import HomePage from './components/HomePage'
-import ProductPage from './components/Product'
-import ProductDetailPage from './components/ProductDetail'
 import Dashboard from './pages/admin/Dashboard'
 import ProductManagementPage from './pages/admin/Product/ProductManagement'
 import AddProductPage from './pages/admin/Product/AddProduct'
@@ -17,6 +15,8 @@ import Signin from "./pages/admin/Auth/signIn";
 import { IProduct } from "./interfaces/product";
 import { ICategory } from "./interfaces/category";
 import SignUp from "./pages/admin/Auth/signUp";
+import Products from "./components/Layout/Products";
+import ProductsDetail from "./components/Layout/Products-detail";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -46,7 +46,7 @@ function App() {
   
   const onHandleUpdate = (product:IProduct) => { 
     updateProduct(product).then(() => {
-      // setProducts(products.map((item) => (item.id === product.id ? product : item)));
+      setProducts(products.map((item) => (item.id === product.id ? product : item)));
     });
   };
   // const onHandleAddCategory = (category:ICategory) => {
@@ -70,11 +70,12 @@ function App() {
 
       <BrowserRouter>
         <Routes>
+          <Route path='/products/:id' element={<ProductsDetail/>} />
           <Route path='/' element={<WebsiteLayout />}>
             <Route index element={<HomePage />} />
             <Route path='products'>
-              <Route index element={<ProductPage products={products} onRemove={onHandleRemove} categories={categories}/>} />
-              <Route path=':id' element={<ProductDetailPage products={products} categories={categories}/>} />
+              <Route index element={<Products/>} />
+              {/* <Route path=':id' element={<ProductsDetail/>} /> */}
             </Route>
           </Route>
           <Route path="signup" index element={<SignUp/>}/>
@@ -89,7 +90,6 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-
     </div>
   )
 }

@@ -49,8 +49,6 @@ const items: MenuItem[] = [
   getItem('Products', '2', <ProjectOutlined />, [
     getItem('All Products', '2.1', null, undefined, undefined, '/admin/products'),
     getItem('Add Product', '2.2', null, undefined, undefined, '/admin/products/add'),
-    getItem('All Categories', '2.3', null, undefined, undefined, '/admin/categories'),
-    getItem('Add Categories', '2.4', null, undefined, undefined, '/admin/categories/add_categories'),
   ]),
   getItem('Services', '3', <HomeFilled/>, undefined, undefined, ''),
   getItem('Blog', '3.1', <HomeFilled/>, undefined, undefined, ''),
