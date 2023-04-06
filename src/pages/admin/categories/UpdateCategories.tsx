@@ -29,15 +29,15 @@ const UpdateCategoriesPage = (props: IProps) => {
       });
   }, [id, form]);
 
-  // useEffect(() => {
-  //   getCategories()
-  //     .then((response) => {
-  //       setCategories(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    getCategories()
+      .then((response) => {
+        setCategories(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const onFinish = (data) => {
     const updateCategory = {

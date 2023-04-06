@@ -18,7 +18,7 @@ import SignUp from "./pages/admin/Auth/signUp";
 import Products from "./components/Layout/Products";
 import ProductsDetail from "./components/Layout/Products-detail";
 import AddCategoriesPage from "./pages/admin/categories/AddCategories";
-import CategoriesManagementPage from "./pages/admin/categories/ListCategories";
+import CategoriesManagementPage from "./pages/admin/categories/CategoriesManagement";
 import UpdateCategoriesPage from "./pages/admin/categories/UpdateCategories";
 
 function App() {
@@ -36,8 +36,8 @@ function App() {
   }, []);
   const onHandleRemove = (id: string|number) => {
     deleteProducts(id).then(() => {
-      setProducts(products.filter((item) => item.id !== id));
-      window.location.reload();
+      setProducts(products.filter((item) => item._id !== id));
+      // window.location.reload();
     });
   };
   const onHandleAdd = (product:IProduct) => {
@@ -63,11 +63,11 @@ function App() {
       setCategories(categories.map((item) => (item._id === category._id ? category : item)));
     });
   };
-  const onHandleRemoveCategory = (id: string|number) => {
-    deleteCategories(id).then(() => {
-      setCategories(categories.filter((item) => item.id !== id));
-    });
-  };
+  // const onHandleRemoveCategory = (id: string|number) => {
+  //   deleteCategories(id).then(() => {
+  //     setCategories(categories.filter((item) => item.id !== id));
+  //   });
+  // };
   return (
     <div className="App">
 
@@ -91,9 +91,9 @@ function App() {
               <Route path=':id/update' element={<UpdateProductPage onUpdate={onHandleUpdate} products={products} categories={categories}/>} />
             </Route>
             <Route path='categories' >
-              <Route index element={<CategoriesManagementPage onRemove={onHandleRemoveCategory} categories={categories}/>} />
+              <Route index element={<CategoriesManagementPage  categories={categories}/>} />
               <Route path='add' element={<AddCategoriesPage onAdd={onHandleAddCategory} />} />
-              <Route path=':id/update' element={<UpdateCategoriesPage onUpdate={onHandleUpdateCategory} />} />
+              <Route path=':id/update' element={<UpdateCategoriesPage onHandleUpdateCategory={onHandleUpdateCategory}/>}  />
             </Route>
           </Route>
         </Routes>

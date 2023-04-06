@@ -3,13 +3,10 @@ import React, { useRef, useState, useEffect } from "react";
 import { Button, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { ICategory } from "../../../interfaces/category";
-import { getCategories } from "../../../api/category";
+import { getCategories, deleteCategories } from "../../../api/category";
 
-const CategoriesManagementPage = (props) => {
+const CategoriesManagementPage = (props: any) => {
   const [categories, setCategories] = useState<ICategory[]>([]);
-  const removeCategory = (id: ICategory) => {
-    props.onRemove(id);
-  };
   const data = Array.isArray(props.categories)
     ? props.categories.map((item) => {
         const category = categories?.find((cat) => cat._id === item.categoryId);
@@ -19,7 +16,16 @@ const CategoriesManagementPage = (props) => {
         };
       })
     : [];
-    
+  const removeCategory = (key: string | number) => {
+    deleteCategories(key)
+      .then(() => {
+        setCategories(categories.filter((item) => item._id !== id));
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   useEffect(() => {
     getCategories()
       .then((response) => {
@@ -29,6 +35,7 @@ const CategoriesManagementPage = (props) => {
         console.error(error);
       });
   }, []);
+
   interface DataType {
     key: string;
     name: string;
@@ -60,9 +67,12 @@ const CategoriesManagementPage = (props) => {
       ),
     },
   ];
-
   return (
-    <Table columns={columns} dataSource={categories} pagination={{ pageSize: 5 }} />
+    <Table
+      columns={columns}
+      dataSource={categories.map((item) => ({ key: item._id, name: item.name }))}
+      pagination={{ pageSize: 5 }}
+    />
   );
 };
 
