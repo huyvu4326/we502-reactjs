@@ -17,6 +17,9 @@ import { ICategory } from "./interfaces/category";
 import SignUp from "./pages/admin/Auth/signUp";
 import Products from "./components/Layout/Products";
 import ProductsDetail from "./components/Layout/Products-detail";
+import AddCategoriesPage from "./pages/admin/categories/AddCategories";
+import CategoriesManagementPage from "./pages/admin/categories/ListCategories";
+import UpdateCategoriesPage from "./pages/admin/categories/UpdateCategories";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -49,22 +52,22 @@ function App() {
       setProducts(products.map((item) => (item.id === product.id ? product : item)));
     });
   };
-  // const onHandleAddCategory = (category:ICategory) => {
-  //   addCategory(category).then(() => {
-  //     getCategories().then(({data}) => setCategories(data))
-  //   });
-  // };
+  const onHandleAddCategory = (category:ICategory) => {
+    addCategory(category).then(() => {
+      getCategories().then(({data}) => setCategories(data))
+    });
+  };
   
-  // const onHandleUpdateCategory = (category:ICategory) => {
-  //   updateCategory(category).then(() => {
-  //     setCategories(categories.map((item) => (item.id === category.id ? category : item)));
-  //   });
-  // };
-  // const onHandleRemoveCategory = (id: string|number) => {
-  //   deleteCategories(id).then(() => {
-  //     setCategories(categories.filter((item) => item.id !== id));
-  //   });
-  // };
+  const onHandleUpdateCategory = (category:ICategory) => {
+    updateCategory(category).then(() => {
+      setCategories(categories.map((item) => (item._id === category._id ? category : item)));
+    });
+  };
+  const onHandleRemoveCategory = (id: string|number) => {
+    deleteCategories(id).then(() => {
+      setCategories(categories.filter((item) => item.id !== id));
+    });
+  };
   return (
     <div className="App">
 
@@ -86,6 +89,11 @@ function App() {
               <Route index element={<ProductManagementPage products={products} onRemove={onHandleRemove} categories={categories}/>} />
               <Route path='add' element={<AddProductPage onAdd={onHandleAdd} />} />
               <Route path=':id/update' element={<UpdateProductPage onUpdate={onHandleUpdate} products={products} categories={categories}/>} />
+            </Route>
+            <Route path='categories' >
+              <Route index element={<CategoriesManagementPage onRemove={onHandleRemoveCategory} categories={categories}/>} />
+              <Route path='add' element={<AddCategoriesPage onAdd={onHandleAddCategory} />} />
+              <Route path=':id/update' element={<UpdateCategoriesPage onUpdate={onHandleUpdateCategory} />} />
             </Route>
           </Route>
         </Routes>

@@ -37,7 +37,7 @@ const Products = (props: Props) => {
                       {product.description}
                     </p>
                     <p className="s-price text-center">{product.price}</p>
-                    <a href={product.link}>Link Github</a>
+                    <a href={product.link}>Link Github</a><br/>
                     <Link to={`/products/${product._id}`}>Chi tiết</Link>
                   </div>
                 </div>

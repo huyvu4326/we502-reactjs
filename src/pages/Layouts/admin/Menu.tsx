@@ -3,12 +3,9 @@ import {
   HomeFilled,
   ProjectOutlined,
   LinkOutlined,
-  MailOutlined,
-  SettingOutlined,
 } from '@ant-design/icons';
-import { Divider, Menu, Switch } from 'antd';
+import { Menu } from 'antd';
 import type { MenuProps, MenuTheme } from 'antd/es/menu';
-// import img from '../../../../public/Twitter-logo.svg.webp'
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -26,17 +23,17 @@ function getItem(
     children,
     type,
   };
+  
   if (href) {
     itemProps.label = (
       <a href={href}>
-        {icon}
         <span>{label}</span>
       </a>
     );
-  } else {
+  } 
+  else {
     itemProps.label = (
       <>
-        {icon}
         <span>{label}</span>
       </>
     );
@@ -49,36 +46,34 @@ const items: MenuItem[] = [
   getItem('Products', '2', <ProjectOutlined />, [
     getItem('All Products', '2.1', null, undefined, undefined, '/admin/products'),
     getItem('Add Product', '2.2', null, undefined, undefined, '/admin/products/add'),
+    getItem('All Categories', '2.3', null, undefined, undefined, '/admin/categories'),
+    getItem('Add Categories', '2.4', null, undefined, undefined, '/admin/categories/add'),
   ]),
-  getItem('Services', '3', <HomeFilled/>, undefined, undefined, ''),
-  getItem('Blog', '3.1', <HomeFilled/>, undefined, undefined, ''),
+  getItem('Services', '3', <ProjectOutlined/>, undefined, undefined, ''),
+  getItem('Blog', '3.1', <ProjectOutlined/>, undefined, undefined, ''),
   getItem('Contact', '4', <LinkOutlined />, [
-    getItem('Email', '4.1', null, undefined, undefined, 'mailto:contact@example.com'),
-    getItem('Phone', '4.2', null, undefined, undefined, ''),
+    getItem('Havu6544@gmail.com', '4.1', null, undefined, undefined, ),
+    getItem('0352740831', '4.2', null, undefined, undefined, ),
   ]),
 ];
-
-
 const MenuAdmin = () => {
-  const [theme, setTheme] = useState<MenuTheme>('light');
-  
+  // const [theme, setTheme] = useState<MenuTheme>('light');
+  const [collapsed, setCollapsed] = useState(false);
+
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
   return (
-    <>
-      {/* <Switch
-        checked={theme === 'dark'}
-        onChange={(checked) => setTheme(checked ? 'dark' : 'light')}
-        checkedChildren="Dark"
-        unCheckedChildren="Light"
-        style={{ marginBottom: 16 }}
-      /> */}
+    <div style={{ width: 256 }}>
       <Menu
-        style={{ width: 256 }}
         defaultSelectedKeys={['1']}
-        defaultOpenKeys={['2']}
-        theme={theme}
+        defaultOpenKeys={['sub1']}
+        mode="inline"
+        theme="light"
+        inlineCollapsed={collapsed}
         items={items}
       />
-    </>
+    </div>
   );
 };
 
