@@ -59,6 +59,8 @@ function App() {
   };
   
   const onHandleUpdateCategory = (category:ICategory) => {
+    console.log(category);
+    
     updateCategory(category).then(() => {
       setCategories(categories.map((item) => (item._id === category._id ? category : item)));
     });

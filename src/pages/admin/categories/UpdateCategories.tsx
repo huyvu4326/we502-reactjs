@@ -10,7 +10,7 @@ interface ICategory {
   name: string;
 }
 interface IProps {
-  onUpdate: (category: ICategory) => void;
+  onHandleUpdateCategory: (category: ICategory) => void;
   categories: ICategory[];
 }
 const UpdateCategoriesPage = (props: IProps) => {
@@ -44,10 +44,10 @@ const UpdateCategoriesPage = (props: IProps) => {
       _id: id,
       ...data,
     };
-    navigate("/admin/categories");
+    props.onHandleUpdateCategory(updateCategory);
     message.success("Cập nhật danh mục thành công!", 2);
     console.log(updateCategory);
-    props.onUpdate(updateCategory);
+    navigate("/admin/categories");
   };
 
   const onFinishFailed = (errorInfo: any) => {

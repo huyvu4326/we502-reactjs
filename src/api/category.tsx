@@ -14,8 +14,8 @@ export const addCategory = (category: ICategory) => {
     },
   });
 };
-export const updateCategory = (_id: number | string, category: ICategory) => {
-  return instance.put(`/categories/${_id}`, category, {
+export const updateCategory = (category: ICategory) => {
+  return instance.patch(`/categories/${category._id}`, category, {
     headers: {
       Authorization: `Bearer ${JSON.parse(localStorage.getItem("token")!)}`,
     },
