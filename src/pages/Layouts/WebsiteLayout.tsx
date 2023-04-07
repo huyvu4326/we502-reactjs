@@ -8,14 +8,8 @@ const WebsiteLayout = () => {
             <header>
                <HomePage/>
             </header>
-            {/* <main>
-                <Outlet />
-            </main>
-            <footer>
-                
-            </footer> */}
         </div>
     )
 }
 
-export default WebsiteLayout
+export default WebsiteLayout;

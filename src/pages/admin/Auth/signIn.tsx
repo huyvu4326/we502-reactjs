@@ -15,8 +15,12 @@ const Signin = (props: Props) => {
     const { data: user } = await login(values);
     console.log(user);
     localStorage.setItem("token", JSON.stringify(user.accessToken));
-    navigate('/admin')
-    message.success('Đăng nhập thành công!', 2);
+    message.success("Đăng nhập thành công!", 2);
+    if (user.role === "member") {
+      navigate("/");
+    } else {
+      navigate("/admin");
+    }
   };
   return (
     <Form

@@ -53,8 +53,8 @@ const ProductsDetail = ( ) => {
                     </li>
                     <li>
                       <strong>Github</strong>:{" "}
-                      <a href={product.link}>
-                        <i className="fa-brands fa-github"></i>
+                      <a href="">
+                        <i className="fa-brands fa-github">{product.link}</i>
                       </a>
                     </li>
                   </ul>

@@ -8,7 +8,7 @@ const Header = (props: Props) => {
       <header id="header" className="fixed-top" style={{backgroundColor: 'black'}}>
         <div className="container d-flex align-items-center justify-content-between">
           <h1 className="logo">
-            <a href="/login">Hà Huy Vũ</a>
+            <a href="/admin">Hà Huy Vũ</a>
           </h1>
           <nav id="navbar" className="navbar">
             <ul>

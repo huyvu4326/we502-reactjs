@@ -19,8 +19,8 @@ const CategoriesManagementPage = (props: any) => {
   const removeCategory = (key: string | number) => {
     deleteCategories(key)
       .then(() => {
-        setCategories(categories.filter((item) => item._id !== id));
-        window.location.reload();
+        setCategories(categories.filter((item) => item._id !== key));
+        // window.location.reload();
       })
       .catch((error) => {
         console.error(error);
