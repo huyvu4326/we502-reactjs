@@ -7,6 +7,7 @@ import { ICategory } from "../../../interfaces/category";
 import { getCategories } from "../../../api/category";
 
 const ProductManagementPage = (props) => {
+  
   // const { categories, products, onRemove } = props;
   const [categories, setCategories] = useState<ICategory[]>([]);
   const removeProduct = (id: IProduct) => {
@@ -79,15 +80,19 @@ const ProductManagementPage = (props) => {
       key: "action",
       render: (record) => (
         <Space size="middle">
+          <Button type="primary">
+            <Link to={`/admin/products/${record.key}/update`}>Update</Link>
+          </Button>
           <Button
             style={{ backgroundColor: "red" }}
             type="primary"
-            onClick={() => removeProduct(record.key)}
+            onClick={() => {
+              if (window.confirm("Bạn có chắc chắn muốn xóa?")) {
+                removeProduct(record.key);
+              }
+            }}
           >
             Remove
-          </Button>
-          <Button type="primary">
-            <Link to={`/admin/products/${record.key}/update`}>Update</Link>
           </Button>
         </Space>
       ),
@@ -95,7 +100,7 @@ const ProductManagementPage = (props) => {
   ];
 
   return (
-    <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} />
+    <Table columns={columns} dataSource={data} pagination={{ pageSize: 7 }} />
   );
 };
 

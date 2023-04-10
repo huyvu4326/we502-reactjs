@@ -18,7 +18,7 @@ const HomePage = (props: Props) => {
       <Hero />
       <AboutPage />
       <Services />
-      <Products/>
+      <Products />
       <Counter />
       <Blog />
       <Contact />

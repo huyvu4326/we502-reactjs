@@ -13,19 +13,7 @@ interface IProps {
   categories: ICategory[];
 }
 const AddCategoriesPage = (props: IProps) => {
-  // const [categories, setCategories] = useState<ICategory[]>([]);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   getCategories()
-  //     .then((response) => {
-  //       setCategories(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
-
   const onFinish = (values: any) => {
     // console.log(values);
     props.onAdd(values);
@@ -57,42 +45,6 @@ const AddCategoriesPage = (props: IProps) => {
           <Input />
         </Form.Item>
 
-        {/* <Form.Item
-          label="Product Price"
-          name="price"
-          rules={[{ required: true, message: "Vui lòng nhập giá sản phẩm!" }]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Product Description"
-          name="description"
-          rules={[{ required: true, message: "Vui lòng nhập mô tả sản phẩm!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Link Github"
-          name="link"
-          rules={[{ required: true, message: "Vui lòng nhập link github!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Category"
-          name="categoryId"
-          // rules={[{ required: true, message: 'Vui lòng chọn danh mục!' }]}
-        >
-          <Select>
-            {categories &&
-              categories.map((category) => (
-                <Select.Option key={category._id} value={category._id}>
-                  {category.name}
-                </Select.Option>
-              ))}
-          </Select>
-        </Form.Item> */}
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
             Thêm danh mục

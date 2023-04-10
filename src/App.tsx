@@ -37,7 +37,6 @@ function App() {
   const onHandleRemove = (id: string|number) => {
     deleteProducts(id).then(() => {
       setProducts(products.filter((item) => item._id !== id));
-      // window.location.reload();
     });
   };
   const onHandleAdd = (product:IProduct) => {

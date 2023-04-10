@@ -1,25 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, message } from "antd";
+import { Button, Checkbox, Form, Input, message, Alert } from "antd";
 import { login } from "../../../api/auth";
+
 type Props = {};
 
 const Signin = (props: Props) => {
-  const {
-    formState: { errors },
-  } = useForm();
   const navigate = useNavigate();
   const onFinish = async (values: any) => {
-    const { data: user } = await login(values);
-    console.log(user);
-    localStorage.setItem("token", JSON.stringify(user.accessToken));
-    message.success("Đăng nhập thành công!", 2);
-    if (user.role === "member") {
-      navigate("/");
-    } else {
+    try {
+      const { data: user } = await login(values);
+      localStorage.setItem("token", JSON.stringify(user.accessToken));
+      message.success("Đăng nhập thành công!", 2);
       navigate("/admin");
+    } catch (error) {
+      message.error("Email hoặc mật khẩu không chính xác");
     }
   };
   return (
@@ -35,7 +32,7 @@ const Signin = (props: Props) => {
       <Form.Item
         label="Email"
         name="email"
-        rules={[{ required: true, message: "Please input your Email!" }]}
+        rules={[{ required: true, message: "Vui lòng nhập Email!" }]}
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
@@ -45,7 +42,7 @@ const Signin = (props: Props) => {
       <Form.Item
         label="Password "
         name="password"
-        rules={[{ required: true, message: "Please input your Password!" }]}
+        rules={[{ required: true, message: "Vui lòng nhập mật khẩu!" }]}
       >
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}

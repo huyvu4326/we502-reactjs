@@ -57,11 +57,11 @@ const AdminLayout = () => {
           </Outlet>
         </main>
       </div>
-      <div style={{ position: "fixed", bottom: "0", left: "0", width: "100%" }}>
+      {/* <div style={{ position: "fixed", bottom: "0", left: "0", width: "100%" }}>
         <footer>
           <FooterAdmin />
         </footer>
-      </div>
+      </div> */}
     </div>
   );
 };

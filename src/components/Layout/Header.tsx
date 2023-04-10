@@ -5,7 +5,11 @@ type Props = {};
 const Header = (props: Props) => {
   return (
     <div>
-      <header id="header" className="fixed-top" style={{backgroundColor: 'black'}}>
+      <header
+        id="header"
+        className="fixed-top"
+        style={{ backgroundColor: "black" }}
+      >
         <div className="container d-flex align-items-center justify-content-between">
           <h1 className="logo">
             <a href="/admin">Hà Huy Vũ</a>

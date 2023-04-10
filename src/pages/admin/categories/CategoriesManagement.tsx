@@ -5,22 +5,13 @@ import type { ColumnsType } from "antd/es/table";
 import { ICategory } from "../../../interfaces/category";
 import { getCategories, deleteCategories } from "../../../api/category";
 
-const CategoriesManagementPage = (props: any) => {
+const CategoriesManagementPage = (props) => {
   const [categories, setCategories] = useState<ICategory[]>([]);
-  const data = Array.isArray(props.categories)
-    ? props.categories.map((item) => {
-        const category = categories?.find((cat) => cat._id === item.categoryId);
-        return {
-          key: item._id,
-          name: item.name,
-        };
-      })
-    : [];
+  const data = categories.map((item) => ({ key: item._id, name: item.name }));
   const removeCategory = (key: string | number) => {
     deleteCategories(key)
       .then(() => {
         setCategories(categories.filter((item) => item._id !== key));
-        // window.location.reload();
       })
       .catch((error) => {
         console.error(error);
@@ -53,26 +44,26 @@ const CategoriesManagementPage = (props: any) => {
       key: "action",
       render: (record) => (
         <Space size="middle">
+          <Button type="primary">
+            <Link to={`/admin/categories/${record.key}/update`}>Update</Link>
+          </Button>
           <Button
             style={{ backgroundColor: "red" }}
             type="primary"
-            onClick={() => removeCategory(record.key)}
+            onClick={() => {
+              if (window.confirm("Bạn có chắc chắn muốn xóa?")) {
+                removeCategory(record.key);
+              }
+            }}
           >
             Remove
-          </Button>
-          <Button type="primary">
-            <Link to={`/admin/categories/${record.key}/update`}>Update</Link>
           </Button>
         </Space>
       ),
     },
   ];
   return (
-    <Table
-      columns={columns}
-      dataSource={categories.map((item) => ({ key: item._id, name: item.name }))}
-      pagination={{ pageSize: 5 }}
-    />
+    <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} />
   );
 };
 

@@ -2,15 +2,14 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getProductById} from "../../api/product";
-const ProductsDetail = ( ) => {
-    const {id} = useParams();
+import { getProductById } from "../../api/product";
+const ProductsDetail = () => {
+  const { id } = useParams();
   const [product, setProducts] = useState([]);
   useEffect(() => {
     getProductById(id).then((response) => {
       setProducts(response.data);
       console.log(response.data);
-      
     });
   }, []);
 
@@ -25,18 +24,14 @@ const ProductsDetail = ( ) => {
 
   return (
     <div>
-        <div><Header/></div>
+      <div>
+        <Header />
+      </div>
       <main id="main">
         <section id="portfolio-details" className="portfolio-details">
           <div className="container">
             <div className="row gy-4">
               <div className="col-lg-8">
-                {/* <div className="portfolio-details-slider swiper">
-                  <div className="swiper-wrapper align-items-center">
-                    <div className="swiper-slide">${strImage}</div>
-                  </div>
-                  <div className="swiper-pagination"></div>
-                </div> */}
               </div>
               <div className="col-lg-4">
                 <div className="portfolio-info">

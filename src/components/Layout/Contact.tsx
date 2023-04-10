@@ -109,7 +109,8 @@ const Contact = (props: Props) => {
                         </p>
                         <ul className="list-ico">
                           <li>
-                            <span className="bi bi-geo-alt"></span> Tòa L, Trường FPT Polytechnich
+                            <span className="bi bi-geo-alt"></span> Tòa L,
+                            Trường FPT Polytechnich
                           </li>
                           <li>
                             <span className="bi bi-phone"></span> 0352-740-831

@@ -7,14 +7,24 @@ import { signup } from "../../../api/auth";
 type Props = {};
 
 const SignUp = (props: Props) => {
-  const {formState: { errors }} = useForm();
+  const {
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
   const onFinish = async (values: any) => {
-    const { data: user } = await signup(values);
-    // console.log(user);
-    localStorage.setItem("token", JSON.stringify(user.accessToken));
-    navigate('/login')
-    message.success('Đăng ký thành công!', 2);
+    try {
+      const { data: user } = await signup(values);
+      localStorage.setItem("token", JSON.stringify(user.accessToken));
+      navigate("/login");
+      message.success("Đăng ký thành công!", 2);
+    } catch (error) {
+      if (error.response.data.message === "Email đã tồn tại") {
+        message.error("Email đã được sử dụng, vui lòng thử lại!", 2);
+      }
+      // } else {
+      //   message.error("Đăng ký không thành công, vui lòng thử lại!", 2);
+      // }
+    }
   };
   return (
     <Form
@@ -29,7 +39,7 @@ const SignUp = (props: Props) => {
       <Form.Item
         label="Name"
         name="name"
-        rules={[{ required: true, message: "Please input your Name!" }]}
+        rules={[{ required: true, message: "Vui lòng nhập tên!" }]}
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
@@ -39,7 +49,7 @@ const SignUp = (props: Props) => {
       <Form.Item
         label="Email"
         name="email"
-        rules={[{ required: true, message: "Please input your Email!" }]}
+        rules={[{ required: true, message: "Vui lòng nhập email!" }]}
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
@@ -49,7 +59,7 @@ const SignUp = (props: Props) => {
       <Form.Item
         label="Password "
         name="password"
-        rules={[{ required: true, message: "Please input your Password!" }]}
+        rules={[{ required: true, message: "Vui lòng nhập mật khẩu!" }]}
       >
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
@@ -60,7 +70,9 @@ const SignUp = (props: Props) => {
       <Form.Item
         label="Confirm password "
         name="confirmPassword"
-        rules={[{ required: true, message: "Please input your Confirm password!" }]}
+        rules={[
+          { required: true, message: "Vui lòng nhập lại mật khẩu!" },
+        ]}
       >
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}

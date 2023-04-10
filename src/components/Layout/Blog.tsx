@@ -49,11 +49,11 @@ const Blog = (props: Props) => {
                   <div className="post-author">
                     <a href="#">
                       <img
-                        src="src/assets/img/testimonial-2.jpg"
+                        src="src/assets/img/avt3.jpg"
                         alt=""
                         className="avatar rounded-circle"
                       />
-                      <span className="author">Morgan Freeman</span>
+                      <span className="author">Hà Huy Vũ</span>
                     </a>
                   </div>
                   <div className="post-date">
@@ -92,11 +92,11 @@ const Blog = (props: Props) => {
                   <div className="post-author">
                     <a href="#">
                       <img
-                        src="src/assets/img/testimonial-2.jpg"
+                        src="src/assets/img/avt.jpg"
                         alt=""
                         className="avatar rounded-circle"
                       />
-                      <span className="author">Morgan Freeman</span>
+                      <span className="author">Hà Huy Vũ</span>
                     </a>
                   </div>
                   <div className="post-date">
@@ -135,11 +135,11 @@ const Blog = (props: Props) => {
                   <div className="post-author">
                     <a href="#">
                       <img
-                        src="src/assets/img/testimonial-2.jpg"
+                        src="src/assets/img/avt2.jpg"
                         alt=""
                         className="avatar rounded-circle"
                       />
-                      <span className="author">Morgan Freeman</span>
+                      <span className="author">Hà Huy Vũ</span>
                     </a>
                   </div>
                   <div className="post-date">

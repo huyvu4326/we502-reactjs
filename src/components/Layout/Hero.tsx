@@ -6,7 +6,7 @@ const Hero = () => {
       <div
         id="hero"
         className="hero route bg-image"
-        style={{ backgroundImage: "url(src/assets/img/hero-bg.jpg)" }}
+        style={{ backgroundImage: "url(src/assets/img/counters-bg.jpg)"}}
       >
         <div className="overlay-itro"></div>
         <div className="hero-content display-table">

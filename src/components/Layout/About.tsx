@@ -13,11 +13,11 @@ const AboutPage = (props: Props) => {
                 <div className="row">
                   <div className="col-md-6">
                     <div className="row">
-                      <div className="col-sm-6 col-md-5" >
-                        <div className="about-img" >
-                          <img 
+                      <div className="col-sm-6 col-md-5">
+                        <div className="about-img">
+                          <img
                             src="/src/assets/img/avt.jpg"
-                            className="img-fluid rounded b-shadow-a rounded-circle" 
+                            className="img-fluid rounded b-shadow-a rounded-circle"
                             alt=""
                           />
                         </div>
